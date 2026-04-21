@@ -91,7 +91,7 @@
 .results .hero__btn {margin-top:4vw}
 .second-slider,.first-slider {padding:12vw 0vw 10vw 0vw}
 .second-slider .mainTitle,.first-slider .mainTitle {padding-left:4vw}
-.second-slider .swiper,.first-slider .swiper {padding:0 0 15px 0}
+.second-slider .swiper,.first-slider .swiper {padding:0 0 15px 0; position: initial !important;}
 .second-slider .mainTitle,.first-slider .mainTitle {color:#968a8f; margin-bottom:5vw}
 .s10 .mainTitle {text-align:left; padding-left:5vw}
 .second-slider-pagination.swiper-pagination-progressbar,.first-slider-pagination.swiper-pagination-progressbar {position:relative; margin-left:auto; margin-right:auto; height:4px; background:#003f82; border-radius:2px !important; overflow:hidden; margin-top:20px; display:block}
