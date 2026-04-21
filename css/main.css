@@ -44,7 +44,6 @@
     .first-swiper video {
         min-height: 100%;
         min-width: 18.3vw;
-        background: #000;
         border-radius: 1vw;
         object-fit: cover;
         overflow: hidden;
