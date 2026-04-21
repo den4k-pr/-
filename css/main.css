@@ -29,6 +29,28 @@
  50% {transform:scale(1.01)}
  100% {transform:scale(1)}
 }
+
+.first-swiper .swiper-slide,
+.first-swiper video{
+    border-radius: 3vw;
+    overflow: hidden;
+    height: 100%;
+    margin: 0 auto;
+    max-height: 524px;
+    object-fit: cover;
+}
+@media (min-width: 800px) {
+    .first-swiper .swiper-slide,
+    .first-swiper video {
+        min-height: 100%;
+        max-height: 292px;
+        min-width: 18.3vw;
+        background: #000;
+        border-radius: 1vw;
+        object-fit: cover;
+        overflow: hidden;
+    }
+}
 .hero__footer-info {display:flex; justify-content:flex-start; align-items:center; gap:2vw; margin-top:4vw; font-size:3.5vw; opacity:0.8}
 .icon-clock {width:4vw; height:4vw}
 .rateBody {padding:0 5vw}
