@@ -1,84 +1,125 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. ОРИГІНАЛЬНИЙ КОД ДЛЯ .s7 ТА .s11 (АВТОПЛЕЙ ПРИ СКРОЛІ)
-    const videoObserver = new IntersectionObserver((entries) => {
+
+    // ==============================================================
+    // КОНФІГУРАЦІЯ
+    // ==============================================================
+    const AUTOPLAY_THRESHOLD = 0.5;
+    const LAZY_THRESHOLD = 0.01;
+
+    // ==============================================================
+    // 1. ЛЕНИВОЕ ЗАВАНТАЖЕННЯ для .s7 та .s11
+    // ==============================================================
+    const lazyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const video = entry.target;
+
+            if (!video.src && video.dataset.src) {
+                video.src = video.dataset.src;
+                video.preload = 'metadata';
+                video.load();
+            }
+
+            lazyObserver.unobserve(video);
+        });
+    }, {
+        threshold: LAZY_THRESHOLD,
+        rootMargin: '200px 0px'
+    });
+
+    // ==============================================================
+    // 2. АВТОПЛЕЙ для .s7 та .s11
+    // ==============================================================
+    const autoplayObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const video = entry.target;
+            if (video.closest('.swiper-slide')) return;
+
             if (entry.isIntersecting) {
-                if (!video.src && video.dataset.src) {
-                    video.src = video.dataset.src;
-                    video.load(); 
+                const tryPlay = () => {
+                    video.play().catch(() => console.log('Автоплей заблоковано'));
+                };
+                if (video.readyState >= 2) {
+                    tryPlay();
+                } else {
+                    video.addEventListener('canplay', tryPlay, { once: true });
                 }
-                video.play().catch(() => {});
             } else {
                 if (!video.paused) video.pause();
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: AUTOPLAY_THRESHOLD });
 
-    document.querySelectorAll('.s7 video, .s11 video').forEach(v => videoObserver.observe(v));
-
-    // 2. ОНОВЛЕНИЙ КОД ДЛЯ СЛАЙДЕРІВ
-    document.addEventListener('click', (e) => {
-        const sliderVideo = e.target.closest('.swiper-slide video');
-        
-        // Якщо клікнули не по відео у слайдері — ігноруємо
-        if (!sliderVideo) return;
-
-        /* ВАЖЛИВО: На iOS, якщо controls = true, клік по кнопці Pause 
-           генерує подію безпосередньо на відео. 
-           Ми дозволяємо браузеру самому обробити клік, якщо контролери вже активні.
-        */
-        if (sliderVideo.controls && e.target === sliderVideo) {
-            // Даємо браузеру відпрацювати стандартно, не робимо preventDefault
-            return; 
-        }
-
-        e.preventDefault(); 
-
-        if (!sliderVideo.src && sliderVideo.dataset.src) {
-            sliderVideo.src = sliderVideo.dataset.src;
-            sliderVideo.load();
-        }
-
-        if (sliderVideo.paused) {
-            // Зупиняємо всі інші відео в слайдерах
-            document.querySelectorAll('.swiper-slide video').forEach(v => {
-                if (v !== sliderVideo) {
-                    v.pause();
-                    v.controls = false;
-                }
-            });
-
-            sliderVideo.muted = false;
-            sliderVideo.controls = true; // Включаємо контролери
-            sliderVideo.play().catch(err => console.error("Помилка відтворення:", err));
-        } else {
-            // Якщо відео грало і ми клацнули по ньому (не по кнопці паузи)
-            sliderVideo.pause();
-            // sliderVideo.controls = false; // Порада: краще не ховати контролери миттєво, щоб юзер міг натиснути Play знову
-        }
+    document.querySelectorAll('.s7 video, .s11 video').forEach(video => {
+        lazyObserver.observe(video);
+        autoplayObserver.observe(video);
     });
 
-    // 3. ЗУПИНКА ПРИ СВАЙПІ
-    const sliders = document.querySelectorAll('.swiper');
-    sliders.forEach(sliderElement => {
-        // Додаємо невелику затримку, щоб Swiper встиг ініціалізуватися
-        const initSwiperEvents = () => {
-            if (sliderElement.swiper) {
+    // ==============================================================
+    // 3. СЛАЙДЕР — логіка кліку
+    // ==============================================================
+    document.querySelectorAll('.swiper-slide video').forEach(video => {
+        video.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // Якщо src ще не встановлений — завантажуємо
+            if (!video.src && video.dataset.src) {
+                video.src = video.dataset.src;
+                video.load();
+            }
+
+            if (!video.controls) {
+                // Перший клік — вмикаємо controls і запускаємо
+                document.querySelectorAll('.swiper-slide video').forEach(v => {
+                    if (v !== video) {
+                        v.pause();
+                        v.controls = false;
+                    }
+                });
+
+                video.muted = false;
+                video.controls = true;
+
+                const tryPlay = () => {
+                    video.play().catch(err => console.error('Помилка:', err));
+                };
+                if (video.readyState >= 2) {
+                    tryPlay();
+                } else {
+                    video.addEventListener('canplay', tryPlay, { once: true });
+                }
+
+            } else {
+                // Controls вже є — toggle play/pause
+                if (video.paused) {
+                    video.play().catch(err => console.error('Помилка:', err));
+                } else {
+                    video.pause();
+                }
+            }
+        }, true); // capture — перехоплюємо до браузера
+    });
+
+    // ==============================================================
+    // 4. ЗУПИНКА ПРИ СВАЙПІ
+    // ==============================================================
+    const initSwiperListeners = () => {
+        document.querySelectorAll('.swiper').forEach(sliderElement => {
+            if (sliderElement.swiper && !sliderElement._videoHandlerAttached) {
+                sliderElement._videoHandlerAttached = true;
+
                 sliderElement.swiper.on('slideChangeTransitionStart', () => {
                     document.querySelectorAll('.swiper-slide video').forEach(v => {
-                        v.pause();
+                        if (!v.paused) v.pause();
                         v.controls = false;
                     });
                 });
             }
-        };
+        });
+    };
 
-        if (sliderElement.swiper) {
-            initSwiperEvents();
-        } else {
-            sliderElement.addEventListener('swiper:init', initSwiperEvents);
-        }
-    });
+    initSwiperListeners();
+    setTimeout(initSwiperListeners, 500);
+    setTimeout(initSwiperListeners, 1500);
 });
