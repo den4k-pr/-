@@ -34,7 +34,7 @@
             </header>
         <picture class="hero__bg">
             <source srcset="./images/s1-fon-desc.webp" media="(min-width: 768px)">
-            <img src="./images/s1-fon-mb.webp" alt="Gym Background" loading="eager" decoding="async">
+            <img src="./images/s1-fon-mb.webp" alt="Gym Background" fetchpriority="high" loading="eager" decoding="async">
         </picture>
 
         <div class="hero__teal-glow"></div>
@@ -105,6 +105,7 @@
   width="1200" 
   height="800" 
   loading="lazy" 
+  fetchpriority="low"
   decoding="async" 
   alt="Stretching image"
   onerror="this.onerror=null; this.src='./images/s2.webp';"
@@ -432,7 +433,7 @@
         height="800" 
         class="swiper-slide" 
         alt="Slide 1"
-        fetchpriority="high"
+        fetchpriority="auto"
         decoding="async"
         onerror="this.onerror=null; this.src='./images/slider-1/slide1.webp';"
     >
@@ -448,6 +449,7 @@
         height="800" 
         loading="lazy"
         class="swiper-slide" 
+        fetchpriority="low"
         alt="Slide 2"
         decoding="async"
         onerror="this.onerror=null; this.src='./images/slider-1/slide2.webp';"
@@ -464,6 +466,7 @@
         height="800" 
         loading="lazy"
         class="swiper-slide" 
+        fetchpriority="low"
         alt="Slide 3"
         decoding="async"
         onerror="this.onerror=null; this.src='./images/slider-1/slide3.webp';"
@@ -480,6 +483,7 @@
         height="800" 
         loading="lazy"
         class="swiper-slide" 
+        fetchpriority="low"
         alt="Slide 4"
         decoding="async"
         onerror="this.onerror=null; this.src='./images/slider-1/slide4.webp';"
@@ -496,6 +500,7 @@
         height="800" 
         loading="lazy"
         class="swiper-slide" 
+        fetchpriority="low"
         alt="Slide 5"
         decoding="async"
         onerror="this.onerror=null; this.src='./images/slider-1/slide5.webp';"
@@ -512,6 +517,7 @@
         height="800" 
         loading="lazy"
         class="swiper-slide" 
+        fetchpriority="low"
         alt="Slide 6"
         decoding="async"
         onerror="this.onerror=null; this.src='./images/slider-1/slide6.webp';"

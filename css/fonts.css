@@ -3,7 +3,7 @@
 /* Gilroy Bold */
 @font-face {
     font-family: 'Gilroy';
-    src: url('../fonts/Gilroy-Bold.ttf') format('truetype');
+    src: url('https://itden-cdn.b-cdn.net/Gilroy-Medium.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: 'Gilroy-m';
-    src: url('../fonts/Gilroy-Medium.ttf') format('truetype');
+    src: url('https://itden-cdn.b-cdn.net/Gilroy-Bold.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
