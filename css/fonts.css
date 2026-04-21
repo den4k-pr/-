@@ -19,7 +19,7 @@
 
 @font-face {
     font-family: 'League Gothic';
-    src: url('../fonts/LeagueGothic-Regular.ttf') format('truetype');
+    src: url('https://itden-cdn.b-cdn.net/LeagueGothic-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
