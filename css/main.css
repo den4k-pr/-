@@ -24,7 +24,7 @@
 .price-old {font-size:7vw; text-decoration:line-through; opacity:0.5}
 .hero__discount {font-size:4vw; font-weight:700; margin-bottom:5vw; line-height:100%; letter-spacing:0.1vw; text-align:left}
 .group-titles {position:relative; z-index:6}
-.hero__btn {width:90vw; background-image:url(../images/button.webp); background-repeat:no-repeat; background-size:100% 100%; border:none; padding:4vw 5vw; border-radius:3vw; color:#fff; font-size:6vw; font-weight:900; box-shadow:0 1vw 4vw rgba(255,77,21,0.4); animation:pulse 1s infinite ease-in-out; cursor:pointer}
+.hero__btn {width:90vw; background-image:url(../images/button.webp); background-repeat:no-repeat; background-size:100% 100%; border:none; padding:4vw 5vw; border-radius:3vw; color:#fff; font-size:6vw; font-weight:900; box-shadow:0 1vw 4vw rgba(255,77,21,0.4); animation:pulse 1s infinite ease-in-out; cursor:pointer; display: flex; justify-content: center; align-items: center;}
 @keyframes pulse {0% {transform:scale(1)}
  50% {transform:scale(1.01)}
  100% {transform:scale(1)}
@@ -131,6 +131,44 @@
  .promo-card-colon {font-size:2vw}
  .promo-card-timer-group {gap:0.3vw}
 }
+
+.first-slider-next, .first-slider-prev {
+        background-image: url(../images/slider-button.webp);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 20vw;
+        height: 9vw;
+        position: absolute;
+        bottom: 9vw;
+        opacity: 0.6;
+        transition: .3s all;
+    }
+    .second-slider-next, .second-slider-prev {
+        background-image: url(../images/slider-button.webp);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 20vw;
+        height: 9vw;
+        position: absolute;
+        bottom: 7vw;
+        opacity: 0.6;
+        transition: .3s all;
+    }
+
+    .second-slider-next,
+    .first-slider-next{
+        right: 1vw;
+    }
+    .second-slider-prev,
+    .first-slider-prev{
+        right: 25vw;
+        transform: rotate(180deg);
+    }
+    .second-slider-pagination.swiper-pagination,
+    .first-slider-pagination.swiper-pagination{
+        margin-left: 4vw;
+        margin-right: auto;
+    }
  @media(min-width:800px) {.hero {margin-top:6vw}
  .hero__content {align-items:flex-start}
 .complete {position:relative; margin-top:8vw; margin-bottom:8vw}
@@ -201,15 +239,15 @@
 .results-items {gap:2vw; padding-top:3vw; flex-direction:row; flex-wrap:wrap; align-items:center; justify-content:center}
 .results-item {padding:1vw 1vw 1vw 11vw; height:9vw; width:48%}
 .results-item p {font-weight:400; font-size:1.7vw; color:#fdfdfd}
-.results .hero__btn {margin-top:2vw; margin-left:auto; display:block}
+.results .hero__btn {margin-top:2vw; margin-left:auto}
 .first-slider {max-width:85vw; width:100%; margin:0 auto; padding-top:8vw}
  .second-slider-pagination.swiper-pagination-progressbar,.first-slider-pagination.swiper-pagination-progressbar {margin:0 2vw 0 0}
- .first-slider-next,.first-slider-prev {background-image:url(../images/slider-button.webp); background-repeat:no-repeat; background-size:contain; width:7vw; height:3vw; position:absolute; top:0vw; opacity:0.6; transition:.3s all}
+ .first-slider-next,.first-slider-prev {background-image:url(../images/slider-button.webp); background-repeat:no-repeat; background-size:contain; width:7vw; height:3vw; position:absolute; bottom:0.2vw; opacity:0.6; transition:.3s all}
  .second-slider .mainTitle,.first-slider .mainTitle {padding-left:0vw}
  .first-slider-prev {transform:rotate(180deg); right:8vw}
  .first-slider-next {right:0vw}
  .first-slider-prev:hover,.first-slider-next:hover {opacity:1}
- .second-slider-next,.second-slider-prev {background-image:url(../images/slider-button.webp); background-repeat:no-repeat; background-size:contain; width:7vw; height:3vw; position:absolute; top:0vw; opacity:0.6; transition:.3s all}
+ .second-slider-next,.second-slider-prev {background-image:url(../images/slider-button.webp); background-repeat:no-repeat; background-size:contain; width:7vw; height:3vw; position:absolute; bottom:-1vw; opacity:0.6; transition:.3s all}
  .second-slider-prev {transform:rotate(180deg); right:8vw}
  .second-slider-next {right:0vw}
  .second-slider-prev:hover,.second-slider-next:hover {opacity:1}
