@@ -115,7 +115,7 @@
 .program-2-img {top:60vw; right:0}
 .program-3-img {bottom:5vw; left:0}
 .program-line {position:absolute; top:57%; left:50%; transform:translate(-50%,-50%); width:60%; z-index:1}
-.promo-card-wrapper {padding-bottom: env(safe-area-inset-bottom);background:linear-gradient(180deg,#222222 0,#111111 100%); padding:7vw 6.5vw 9vw 6.5vw; border-radius:10vw 10vw 0 0; width:100%; user-select:none; position:fixed; bottom:0; transform:translateY(100%); opacity:0; transition:.3s; z-index:99}
+.promo-card-wrapper {background:linear-gradient(180deg,#222222 0,#111111 100%); padding:7vw 6.5vw 9vw 6.5vw; border-radius:10vw 10vw 0 0; width:100%; user-select:none; position:fixed; bottom:0; transform:translateY(100%); opacity:0; transition:.3s; z-index:99}
  .promo-card-wrapper.is-visible {transform:translateY(0); opacity:1}
  .promo-card-top {display:flex; justify-content:space-between; align-items:center; margin-bottom:6vw; padding:0 5px}
  .promo-card-heading {color:#ffffff; font-size:4vw; font-weight:700; letter-spacing:1.5px; text-transform:uppercase}
